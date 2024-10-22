@@ -5,22 +5,22 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_autentication/presentation/user_registration/domain/models/user_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'user_event.dart';
-part 'user_state.dart';
+part 'login_event.dart';
+part 'login_state.dart';
 
-class UserBloc extends Bloc<UserEvent, UserState> {
+class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  UserBloc() : super(const UserState()) {
-    on<RegisterUserEvent>(_registerUser);
+  LoginBloc() : super(const LoginState()) {
+    on<LoginUserEvent>(_registerUser);
   }
 
   FutureOr<void> _registerUser(
-      RegisterUserEvent event, Emitter<UserState> emit) async {
+      LoginUserEvent event, Emitter<LoginState> emit) async {
     emit(state.copyWith(requestStatus: RequestStatus.loading));
 
     try {
-      final user = await _auth.createUserWithEmailAndPassword(
+      final user = await _auth.signInWithEmailAndPassword(
         email: event.email,
         password: event.password,
       );

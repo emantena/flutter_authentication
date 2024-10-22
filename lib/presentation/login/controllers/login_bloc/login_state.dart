@@ -1,4 +1,4 @@
-part of 'user_bloc.dart';
+part of 'login_bloc.dart';
 
 enum RequestStatus {
   initial,
@@ -7,23 +7,23 @@ enum RequestStatus {
   failure,
 }
 
-class UserState extends Equatable {
+class LoginState extends Equatable {
   final RequestStatus requestStatus;
   final String message;
   final UserModel? user;
 
-  const UserState({
+  const LoginState({
     this.requestStatus = RequestStatus.initial,
     this.message = '',
     this.user,
   });
 
-  UserState copyWith({
+  LoginState copyWith({
     RequestStatus? requestStatus,
     String? message,
     UserModel? user,
   }) {
-    return UserState(
+    return LoginState(
       requestStatus: requestStatus ?? this.requestStatus,
       message: message ?? this.message,
       user: user ?? this.user,
